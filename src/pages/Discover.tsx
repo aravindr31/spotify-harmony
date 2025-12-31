@@ -20,7 +20,7 @@ export default function Discover() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-24">
       {/* Subtle gradient background */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]" />
@@ -29,37 +29,37 @@ export default function Discover() {
 
       {/* Header */}
       <header className="relative z-10 border-b border-border/50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <Music className="w-4 h-4 text-primary-foreground" />
-            </div>
-            <span className="font-semibold text-lg">Resonance</span>
+        <div className="container mx-auto px-6 py-4 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+            <Music className="w-4 h-4 text-primary-foreground" />
           </div>
-
-          {/* View Toggle */}
-          <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-lg">
-            <Button
-              variant={activeView === 'discover' ? 'default' : 'ghost'}
-              size="sm"
-              onClick={() => setActiveView('discover')}
-              className="gap-2"
-            >
-              <Compass className="w-4 h-4" />
-              <span className="hidden sm:inline">Discover</span>
-            </Button>
-            <Button
-              variant={activeView === 'stats' ? 'default' : 'ghost'}
-              size="sm"
-              onClick={() => setActiveView('stats')}
-              className="gap-2"
-            >
-              <BarChart3 className="w-4 h-4" />
-              <span className="hidden sm:inline">My Stats</span>
-            </Button>
-          </div>
+          <span className="font-semibold text-lg">Resonance</span>
         </div>
       </header>
+
+      {/* Bottom Navigation Bar */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <div className="flex items-center gap-1 p-1.5 bg-card/80 backdrop-blur-xl border border-border/50 rounded-full shadow-lg">
+          <Button
+            variant={activeView === 'discover' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setActiveView('discover')}
+            className="gap-2 rounded-full px-4"
+          >
+            <Compass className="w-4 h-4" />
+            <span>Discover</span>
+          </Button>
+          <Button
+            variant={activeView === 'stats' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => setActiveView('stats')}
+            className="gap-2 rounded-full px-4"
+          >
+            <BarChart3 className="w-4 h-4" />
+            <span>My Stats</span>
+          </Button>
+        </div>
+      </div>
 
       <main className="relative z-10 container mx-auto px-6 py-8">
         <AnimatePresence mode="wait">
