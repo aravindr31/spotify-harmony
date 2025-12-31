@@ -5,6 +5,7 @@ on:
     branches:
     - main
     - master
+
     paths-ignore:
     - '**.md'
     - 'docs/**'
@@ -16,6 +17,7 @@ permissions:
   id-token: write
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   build_and_deploy:
@@ -64,3 +66,22 @@ jobs:
         tag_name: deploy-${{ github.run_number }}
         name: Release deploy-${{ github.run_number }}
         token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Report Failure
+      if: failure()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: `🚀 Deployment Failed: Run #${context.runNumber}`,
+            body: `The CD Pipeline failed during the latest run.
+            
+            **Workflow:** ${context.workflow}
+            **Commit:** ${context.sha}
+            **Logs:** https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}
+            
+            Please check the build logs to investigate the issue.`,
+            labels: ['bug', 'deployment-failure']
+          })
