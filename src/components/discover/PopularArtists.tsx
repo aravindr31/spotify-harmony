@@ -9,14 +9,12 @@ export const PopularArtists = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["popular-artists"],
     queryFn: () => 
-      // Searching for high-popularity artists
     fetchSpotify<any>("/search?q=genre:pop&type=artist&limit=20&market=US"),
   });
 
   if (isLoading) return <ArtistsSkeleton />;
   if (error) return null;
 
-  // Map and sort by popularity to get the true "top" artists
   const artists: Artist[] = data?.artists.items
     .map((a: any) => mapSpotifyArtistToArtist(a))
     .sort((a: Artist, b: Artist) => b.popularity - a.popularity)
