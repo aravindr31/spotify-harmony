@@ -3,6 +3,7 @@ import { fetchSpotify } from "@/api/spotifyApi";
 import { NewReleasesResponse } from "@/types/spotify";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "../ui/button";
+import { AlbumCard } from "../AlbumCard";
 
 export const FeaturedSection = () => {
   const { data, isLoading, error } = useQuery({
@@ -27,7 +28,7 @@ export const FeaturedSection = () => {
         </div>
         );
     }
-
+    
   return (
     <section>
       <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
@@ -35,26 +36,9 @@ export const FeaturedSection = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {data?.albums.items.map((album) => (
-          <div 
-            key={album.id} 
-            className="group relative aspect-square overflow-hidden rounded-xl border border-border/50 bg-card cursor-pointer"
-            onClick={() => window.open(album.external_urls.spotify, '_blank')}
-          >
-            <img 
-              src={album.images[0]?.url} 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-              alt={album.name}
-            />
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
-              <h3 className="font-bold text-white text-lg leading-tight group-hover:text-primary transition-colors">
-                {album.name}
-              </h3>
-              <p className="text-sm text-gray-300">
-                {album.artists.map(a => a.name).join(", ")}
-              </p>
-            </div>
-          </div>
+        <div className="max-w-lg">
+                  <AlbumCard key={album.id} album={album} rank={1} variant="featured"/>
+                </div>
         ))}
       </div>
     </section>
