@@ -1,8 +1,12 @@
 const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI;
-const scope =
-  "user-read-private user-read-email user-top-read user-library-read";
-
+const scopes = [
+  'user-read-private',
+  'user-read-email',
+  'user-top-read',          
+  'user-read-recently-played',
+  'user-library-read'
+].join(' ');
 const STORAGE_KEYS = {
   ACCESS_TOKEN: "spotify_access_token",
   REFRESH_TOKEN: "spotify_refresh_token",
@@ -38,7 +42,7 @@ export const redirectToSpotifyAuth = async () => {
     client_id: clientId,
     response_type: "code",
     redirect_uri: redirectUri,
-    scope,
+    scope: scopes,
     code_challenge_method: "S256",
     code_challenge: challenge,
   });
