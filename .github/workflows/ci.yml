@@ -5,6 +5,15 @@ on:
     branches:
     - main
     - master
+    paths:
+    - 'src/**'
+    - 'public/**'
+    - 'package*.json'
+    - 'vite.config.*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -36,3 +45,4 @@ jobs:
       with:
         name: site-dist
         path: dist
+        retention-days: 7
