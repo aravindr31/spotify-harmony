@@ -8,7 +8,7 @@ interface AudioFeatureBarProps {
 }
 
 export function AudioFeatureBar({ label, value, color, delay = 0 }: AudioFeatureBarProps) {
-  const percentage = Math.round(value * 100);
+  const percentage = Math.round(value); 
 
   return (
     <motion.div
@@ -24,7 +24,7 @@ export function AudioFeatureBar({ label, value, color, delay = 0 }: AudioFeature
       <div className="h-1.5 rounded-full bg-muted overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${percentage}%` }}
+          animate={{ width: `${Math.min(percentage, 100)}%` }} // Safety cap at 100%
           transition={{ duration: 0.6, delay: delay + 0.1, ease: 'easeOut' }}
           className="h-full rounded-full bg-primary"
           style={color ? { background: color } : undefined}
@@ -53,13 +53,13 @@ export function MoodPieChart({ data }: MoodPieChartProps) {
     return segment;
   });
 
-  const createArcPath = (startAngle: number, endAngle: number, radius: number) => {
-    const start = polarToCartesian(50, 50, radius, endAngle);
-    const end = polarToCartesian(50, 50, radius, startAngle);
-    const largeArcFlag = endAngle - startAngle <= 180 ? 0 : 1;
-    return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
-  };
+const createArcPath = (startAngle: number, endAngle: number, radius: number) => {
+  const start = polarToCartesian(50, 50, radius, endAngle);
+  const end = polarToCartesian(50, 50, radius, startAngle);
 
+  const largeArcFlag = endAngle - startAngle <= 180 ? 0 : 1;
+  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
+};
   const polarToCartesian = (cx: number, cy: number, r: number, angle: number) => {
     const rad = (angle * Math.PI) / 180;
     return {
