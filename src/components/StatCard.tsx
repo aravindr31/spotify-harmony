@@ -12,40 +12,33 @@ interface StatCardProps {
 
 export function StatCard({ label, value, icon, trend, gradient = 'primary', delay = 0 }: StatCardProps) {
   const gradientClasses = {
-    primary: 'from-neon-purple/20 to-neon-blue/20 border-neon-purple/30',
-    accent: 'from-neon-pink/20 to-neon-purple/20 border-neon-pink/30',
-    cool: 'from-neon-blue/20 to-neon-cyan/20 border-neon-blue/30',
-    warm: 'from-neon-orange/20 to-neon-pink/20 border-neon-orange/30',
-  };
-
-  const iconGradients = {
-    primary: 'bg-gradient-primary',
-    accent: 'bg-gradient-accent',
-    cool: 'bg-gradient-cool',
-    warm: 'bg-gradient-warm',
+    primary: 'bg-primary/10 border-primary/20',
+    accent: 'bg-accent/10 border-accent/20',
+    cool: 'bg-secondary/10 border-secondary/20',
+    warm: 'bg-primary/10 border-primary/20',
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.4, delay }}
-      whileHover={{ scale: 1.02, y: -2 }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay }}
+      whileHover={{ scale: 1.01 }}
       className={cn(
-        'relative p-6 rounded-2xl bg-gradient-to-br border backdrop-blur-sm',
+        'relative p-4 rounded-xl border',
         gradientClasses[gradient]
       )}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm text-muted-foreground font-medium">{label}</p>
-          <p className="text-3xl md:text-4xl font-display font-bold mt-1">{value}</p>
+          <p className="text-xs text-muted-foreground uppercase tracking-wider">{label}</p>
+          <p className="text-2xl font-semibold mt-1">{value}</p>
           {trend && (
-            <div className="flex items-center gap-1 mt-2">
+            <div className="flex items-center gap-1 mt-1.5">
               <span
                 className={cn(
-                  'text-sm font-medium',
-                  trend.isPositive ? 'text-neon-green' : 'text-destructive'
+                  'text-xs font-medium',
+                  trend.isPositive ? 'text-primary' : 'text-destructive'
                 )}
               >
                 {trend.isPositive ? '+' : ''}{trend.value}%
@@ -55,7 +48,7 @@ export function StatCard({ label, value, icon, trend, gradient = 'primary', dela
           )}
         </div>
         {icon && (
-          <div className={cn('p-3 rounded-xl', iconGradients[gradient])}>
+          <div className="p-2 rounded-lg bg-primary/20 text-primary">
             {icon}
           </div>
         )}

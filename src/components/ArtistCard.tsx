@@ -21,17 +21,17 @@ export function ArtistCard({ artist, rank, variant = 'default' }: ArtistCardProp
   if (variant === 'compact') {
     return (
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
+        initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
-        whileHover={{ x: 4 }}
-        className="group flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
+        whileHover={{ x: 2 }}
+        className="group flex items-center gap-3 p-2 rounded-lg hover:bg-muted/30 transition-colors cursor-pointer"
       >
         {rank && (
-          <span className="w-6 text-sm font-display text-muted-foreground group-hover:text-primary transition-colors">
+          <span className="w-5 text-sm text-muted-foreground group-hover:text-primary transition-colors">
             {rank}
           </span>
         )}
-        <div className="relative w-10 h-10 rounded-full overflow-hidden">
+        <div className="relative w-10 h-10 rounded-full overflow-hidden bg-muted">
           <img
             src={artist.image}
             alt={artist.name}
@@ -51,39 +51,39 @@ export function ArtistCard({ artist, rank, variant = 'default' }: ArtistCardProp
   if (variant === 'circle') {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.02 }}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
-        className="group flex flex-col items-center gap-3 cursor-pointer"
+        className="group flex flex-col items-center gap-2 cursor-pointer"
       >
         <div className="relative">
-          <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden ring-2 ring-border group-hover:ring-primary transition-all duration-300">
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden ring-2 ring-border/50 group-hover:ring-primary/50 transition-all duration-200 bg-muted">
             <img
               src={artist.image}
               alt={artist.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </div>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
-            className="absolute inset-0 rounded-full flex items-center justify-center bg-background/60 backdrop-blur-sm"
+            className="absolute inset-0 rounded-full flex items-center justify-center bg-background/50"
           >
-            <Play className="w-10 h-10 text-primary" fill="currentColor" />
+            <Play className="w-8 h-8 text-primary" fill="currentColor" />
           </motion.div>
           {rank && (
-            <div className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center font-display font-bold text-primary-foreground">
+            <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-primary flex items-center justify-center text-sm font-medium text-primary-foreground">
               {rank}
             </div>
           )}
         </div>
         <div className="text-center">
-          <h3 className="font-semibold group-hover:text-primary transition-colors truncate max-w-[140px]">
+          <h3 className="text-sm font-medium group-hover:text-primary transition-colors truncate max-w-[100px]">
             {artist.name}
           </h3>
-          <p className="text-xs text-muted-foreground">{formatFollowers(artist.followers)} followers</p>
+          <p className="text-xs text-muted-foreground">{formatFollowers(artist.followers)}</p>
         </div>
       </motion.div>
     );
@@ -91,49 +91,49 @@ export function ArtistCard({ artist, rank, variant = 'default' }: ArtistCardProp
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4 }}
+      whileHover={{ y: -2 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-primary/30 transition-all duration-300 hover:glow-primary cursor-pointer"
+      className="group relative bg-card rounded-lg overflow-hidden border border-border/50 hover:border-primary/20 transition-all duration-200 cursor-pointer"
     >
-      <div className="relative aspect-square">
+      <div className="relative aspect-square bg-muted">
         <img
           src={artist.image}
           alt={artist.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.9 }}
           className="absolute inset-0 flex items-center justify-center"
         >
           <motion.button
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center shadow-lg"
+            className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg"
           >
-            <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
+            <Play className="w-5 h-5 text-primary-foreground ml-0.5" fill="currentColor" />
           </motion.button>
         </motion.div>
 
         {rank && (
-          <div className="absolute top-3 left-3">
-            <span className="text-4xl font-display font-bold text-gradient-primary">
+          <div className="absolute top-2 left-2">
+            <span className="text-2xl font-semibold text-primary">
               #{rank}
             </span>
           </div>
         )}
       </div>
 
-      <div className="p-4">
-        <h3 className="font-display font-semibold text-lg truncate group-hover:text-primary transition-colors">
+      <div className="p-3">
+        <h3 className="font-medium truncate group-hover:text-primary transition-colors">
           {artist.name}
         </h3>
-        <div className="flex flex-wrap gap-1 mt-2">
+        <div className="flex flex-wrap gap-1 mt-1.5">
           {artist.genres.slice(0, 2).map((genre) => (
             <span
               key={genre}
@@ -143,9 +143,9 @@ export function ArtistCard({ artist, rank, variant = 'default' }: ArtistCardProp
             </span>
           ))}
         </div>
-        <div className="flex items-center gap-1 mt-3 text-xs text-muted-foreground">
+        <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
           <Users className="w-3 h-3" />
-          <span>{formatFollowers(artist.followers)} followers</span>
+          <span>{formatFollowers(artist.followers)}</span>
         </div>
       </div>
     </motion.div>
