@@ -39,7 +39,7 @@ const App = () => {
             {!isAuthenticated ? (
               <div className="flex h-screen w-full items-center justify-center">
                 <div className="text-center space-y-4">
-                  <h1 className="text-4xl font-bold tracking-tight">Spotify Harmony</h1>
+                  <h1 className="text-4xl font-bold tracking-tight">Harmony - Your Music Stats</h1>
                   <p className="text-muted-foreground">Login to see your top tracks and artists.</p>
                   <Button 
                     size="lg" 
