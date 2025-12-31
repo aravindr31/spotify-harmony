@@ -1,10 +1,16 @@
 name: CD Pipeline
 
 on:
-  push:
+  pull_request:
     branches:
     - main
     - master
+    paths-ignore:
+    - '**.md'
+    - 'docs/**'
+    - '.github/workflows/**'
+    - '.vscode/**'
+    - '.gitignore'
 
 permissions:
   id-token: write
