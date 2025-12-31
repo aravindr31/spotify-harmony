@@ -10,6 +10,8 @@ import { GenreChip } from '@/components/GenreChip';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { mockTracks, mockArtists, mockListeningStats } from '@/data/mockSpotifyData';
 import { FeaturedSection } from '@/components/discover/FeaturedSection';
+import { TrendingSection } from '@/components/discover/TrendingSection';
+import { PopularArtists } from '@/components/discover/PopularArtists';
 
 type View = 'discover' | 'stats';
 
@@ -77,42 +79,15 @@ export default function Discover() {
               transition={{ duration: 0.2 }}
               className="space-y-12"
             >
-              {/* Header */}
               <div>
                 <h1 className="text-3xl font-semibold tracking-tight">
                   Discover Music
                 </h1>
                 <p className="text-muted-foreground mt-1">Explore trending tracks and artists</p>
               </div>
-
-              {/* Featured Track */}
-              {/* <section>
-                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Featured</h2>
-                <div className="max-w-lg">
-                  <TrackCard track={mockTracks[0]} rank={1} variant="featured" />
-                </div>
-              </section> */}
               <FeaturedSection />
-
-              {/* Trending Tracks */}
-              <section>
-                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Trending</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {mockTracks.slice(1, 5).map((track, i) => (
-                    <TrackCard key={track.id} track={track} rank={i + 2} />
-                  ))}
-                </div>
-              </section>
-
-              {/* Popular Artists */}
-              <section>
-                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Popular Artists</h2>
-                <div className="flex flex-wrap gap-6 justify-start">
-                  {mockArtists.slice(0, 5).map((artist, i) => (
-                    <ArtistCard key={artist.id} artist={artist} rank={i + 1} variant="circle" />
-                  ))}
-                </div>
-              </section>
+              <TrendingSection/>
+              <PopularArtists/>
             </motion.div>
           ) : (
             <motion.div
