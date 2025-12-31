@@ -9,6 +9,7 @@ import { AudioFeatureBar, MoodPieChart, ListeningChart } from '@/components/Char
 import { GenreChip } from '@/components/GenreChip';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { mockTracks, mockArtists, mockListeningStats } from '@/data/mockSpotifyData';
+import { FeaturedSection } from '@/components/discover/FeaturedSection';
 
 type View = 'discover' | 'stats';
 
@@ -85,12 +86,13 @@ export default function Discover() {
               </div>
 
               {/* Featured Track */}
-              <section>
+              {/* <section>
                 <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">Featured</h2>
                 <div className="max-w-lg">
                   <TrackCard track={mockTracks[0]} rank={1} variant="featured" />
                 </div>
-              </section>
+              </section> */}
+              <FeaturedSection />
 
               {/* Trending Tracks */}
               <section>

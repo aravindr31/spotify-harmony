@@ -57,3 +57,24 @@ export interface UserProfile {
 }
 
 export type TimeRange = 'short_term' | 'medium_term' | 'long_term';
+
+export interface SpotifyImage {
+  url: string;
+  height?: number;
+  width?: number;
+}
+
+export interface SpotifyAlbum {
+  id: string;
+  name: string;
+  images: SpotifyImage[];
+  artists: { name: string }[];
+  external_urls: { spotify: string };
+  release_date: string;
+}
+
+export interface NewReleasesResponse {
+  albums: {
+    items: SpotifyAlbum[];
+  };
+}
