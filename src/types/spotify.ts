@@ -20,13 +20,16 @@ export interface Track {
   addedAt?: string;
 }
 
+// src/types/spotify.ts
 export interface Album {
   id: string;
   name: string;
-  artist: string;
-  image: string;
-  releaseDate: string;
-  totalTracks: number;
+  artists: { name: string }[];
+  images: { url: string }[];
+  release_date: string;
+  total_tracks: number;
+  album_type: string;
+  
 }
 
 export interface ListeningStats {
@@ -76,5 +79,22 @@ export interface SpotifyAlbum {
 export interface NewReleasesResponse {
   albums: {
     items: SpotifyAlbum[];
+  };
+}
+
+export interface GlobalTopResponse {
+  tracks: {
+    items: {
+      track: {
+        id: string;
+        name: string;
+        album: {
+          images: { url: string }[];
+          name: string;
+        };
+        artists: { name: string }[];
+        external_urls: { spotify: string };
+      };
+    }[];
   };
 }
