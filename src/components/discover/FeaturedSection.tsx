@@ -8,7 +8,7 @@ import { AlbumCard } from "../AlbumCard";
 export const FeaturedSection = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["new-releases"],
-    queryFn: () => fetchSpotify<NewReleasesResponse>("/browse/new-releases?limit=1"),
+    queryFn: () => fetchSpotify<NewReleasesResponse>("/browse/new-releases?limit=2"),
   });
 
   if (isLoading) return <FeaturedSkeleton />;
@@ -35,9 +35,9 @@ export const FeaturedSection = () => {
         New Releases
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {data?.albums.items.map((album) => (
+        {data?.albums.items.map((album, index) => (
         <div className="max-w-lg">
-                  <AlbumCard key={album.id} album={album} rank={1} variant="featured"/>
+                  <AlbumCard key={album.id} album={album} rank={index + 1} variant="featured"/>
                 </div>
         ))}
       </div>
