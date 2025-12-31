@@ -7,6 +7,7 @@ import { ArtistCard } from '@/components/ArtistCard';
 import { StatCard } from '@/components/StatCard';
 import { AudioFeatureBar, MoodPieChart, ListeningChart } from '@/components/Charts';
 import { GenreChip } from '@/components/GenreChip';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { mockTracks, mockArtists, mockListeningStats } from '@/data/mockSpotifyData';
 
 type View = 'discover' | 'stats';
@@ -29,11 +30,14 @@ export default function Discover() {
 
       {/* Header */}
       <header className="relative z-10 border-b border-border/50">
-        <div className="container mx-auto px-6 py-4 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-            <Music className="w-4 h-4 text-primary-foreground" />
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
+              <Music className="w-4 h-4 text-primary-foreground" />
+            </div>
+            <span className="font-semibold text-lg">Resonance</span>
           </div>
-          <span className="font-semibold text-lg">Resonance</span>
+          <ThemeToggle />
         </div>
       </header>
 
